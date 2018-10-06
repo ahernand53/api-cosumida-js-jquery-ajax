@@ -123,13 +123,12 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="tabla">
+                            <table width="100%" class="table-striped table-bordered table-hover" id="tabla">
                                 <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Ciudad</th>
                                     <th>Email</th>
-                                    <th>Telefono</th>
                                     <th>Opcion</th>
                                 </tr>
                                 </thead>
@@ -140,10 +139,10 @@
                             <!-- /.table-responsive -->
                             <div class="well">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaEmpresa">Nueva Empresa</button>
+                                <button type="button" id="btnCrearEmpresa" class="btn btn-primary" data-toggle="modal" data-target="#modalNuevaEmpresa">Nueva Empresa</button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="nuevaEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <!-- Modal CREAR EMPRESA-->
+                                <div class="modal fade" id="modalNuevaEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -152,23 +151,92 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" id="formCreateEmpresa">
                                                     <div class="form-group">
                                                         <label for="nameEmpresa">Nombre de Empresa</label>
-                                                        <input type="text" class="form-control" id="nameEmpresa" placeholder="Nombre de la empresa">
+                                                        <input type="text" class="form-control" id="nameEmpresa">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="emailEmpresa">Email de Empresa</label>
-                                                        <input type="email" class="form-control" id="emailEmpresa" placeholder="name@example.com">
+                                                        <input type="email" class="form-control" id="emailEmpresa">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="cityEmpresa">Ciudad</label>
-                                                        <input type="text" class="form-control" id="cityEmpresa" placeholder="name@example.com">
+                                                        <input type="text" class="form-control" id="cityEmpresa">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="addresEmpresa">Direccion</label>
+                                                        <input type="text" class="form-control" id="addresEmpresa">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="phoneEmpresa">Telefono</label>
+                                                        <input type="text" class="form-control" id="phoneEmpresa">
                                                     </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-primary" id="crearEmpresa">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--MODAL DETALLE EMPRESA-->
+                                <div class="modal fade" id="modalDetalleEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="modalDetalleTitle"><b>Detalles de la Empresa</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="formDetalleEmpresa">
+                                                <div class="form-group">
+                                                    <label for="nameEmpresa">Nombre de Empresa</label>
+                                                    <input type="text" class="form-control" id="nameDetalle" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="emailEmpresa">Email de Empresa</label>
+                                                    <input type="email" class="form-control" id="emailDetalle" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cityEmpresa">Ciudad</label>
+                                                    <input type="text" class="form-control" id="cityDetalle" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="addresEmpresa">Direccion</label>
+                                                    <input type="text" class="form-control" id="addresDetalle" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phoneEmpresa">Telefono</label>
+                                                    <input type="text" class="form-control" id="phoneDetalle" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--MODAL MOSTRAR EMPLEADOS-->
+                                <div class="modal fade" id="modalMostrarEmpleados" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="modalMostrarE"><b>Empleados</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="mostrarE">
+                                                <ul class="list-group list-group-flush" id="listaEmpleado">
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -210,10 +278,11 @@
 <script>
     $(document).ready(function() {
 
+        // GENERACION DE DATOS EN LA TABLA
         var table = $('#tabla').dataTable({
 
             "ajax":{
-                "url":"http://localhost:8000/api/companies",
+                "url":"https://api-rest-companies-employees.herokuapp.com/api/companies",
                 "dataSrc":"data"
             },
             "columns": [
@@ -225,26 +294,201 @@
                 },
                 {
                     "data": "email"
-                },
-                {
-                    "data": "phone"
                 }
             ],
             rowId: "id",
             "columnDefs": [{
-                "targets": 4,
+                "targets": 3,
                 "data": null,
-                "defaultContent": "<button type='button' id='btnDetalleModal' class='btn btn-success btn-circle' ><i class='fa fa-search'></i> </button>" +
+                "defaultContent": "<button type='button' id='btnDetalleModal' class='btn btn-success btn-circle' data-toggle='modal' data-target='#modalDetalleEmpresa' ><i class='fa fa-search' ></i> </button>"+ "<button type='button' id='btnMostrarEmpleados' data-toggle='modal' data-target='#modalMostrarEmpleados' class='btn btn-primary btn-circle'  style='margin: 0 5px;' ><i class='fa fa-users'></i> </button>" +
                     "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-target='#modalEditar' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
-                    "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalEliminar' ><i class='fa fa-trash'></i> </button>"
+                    "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalMostrarEmpleados' ><i class='fa fa-trash'></i> </button>"
             }],
             responsive: true
 
         });
-        
-        $("#nuevaEmpresa").click(function () {
 
-        })
+        // FUNCION VALIDAR DATOS DE NUEVA EMPRESA
+        function validarForm() {
+            if ($('#nameEmpresa').val() == '') {
+                return false;
+            }
+
+            if ($('#emailEmpresa').val() == '') {
+                return false;
+            }
+
+            if ($('#cityEmpresa').val() == '') {
+                return false;
+            }
+
+            if ($('#addresEmpresa').val() == '') {
+                return false;
+            }
+
+            if ($('#phoneEmpresa').val() == '') {
+                return false;
+            }
+
+            return true;
+        }
+
+        // FUNCION GUARDAR NUEVA EMPRESA
+        $("#btnCrearEmpresa").click(function () {
+            $('#nameEmpresa').val("");
+            $('#emailEmpresa').val("");
+            $('#cityEmpresa').val("");
+            $('#addresEmpresa').val("");
+            $('#phoneEmpresa').val("");
+
+            $('#crearEmpresa').click(function () {
+                if (validarForm()) {
+                    $('div').remove('.errorCreate');
+                    let company = new Object();
+                    company.name_company = $('#nameEmpresa').val();
+                    company.address = $('#addresEmpresa').val();
+                    company.city = $('#cityEmpresa').val();
+                    company.email = $('#emailEmpresa').val();
+                    company.phone = $('#phoneEmpresa').val();
+                    $.ajax({
+                        url: 'https://api-rest-companies-employees.herokuapp.com/api/companies',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: company,
+                        success: function (data) {
+                            $('#modalNuevaEmpresa').modal('hide');
+                            table.api().ajax.reload();
+                        }
+                    }).fail(function ($xhr) {
+                        var data = $xhr.responseJSON;
+                        console.log(data);
+                        $.each(data.error, function (key ,value) {
+                            $('#formCreateEmpresa').append('<div class="alert alert-danger errorCreate">'+ value +'</div>');
+                        })
+                    });
+                } else {
+                    alert('Por favor complete los datos');
+                }
+            });
+        });
+
+        // TODO: SOLUCIONAR LA ACOMULACION DE EMPLEADOS
+        // FUNCION VER EMPLEADOS DE LA EMPRESA
+        $('#tabla tbody').on( 'click', '#btnMostrarEmpleados', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            var element = document.getElementById('listaEmpleado');
+            while(element.firstChild){
+                element.removeChild(element.firstChild);
+            }
+            $.ajax({
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + id + '/employees',
+                datSrc: 'data',
+                success: function (response) {
+                    $.each(response.data, function (key, empleado) {
+                        $('#mostrarE').append('<li class="list-group-item empleado">' + empleado.first_name + ' ' + empleado.last_name + '</li>')
+                    });
+                }
+            });
+        });
+
+        // FUNCION VER DETALLE DE EMPRESA
+        $('#tabla tbody').on( 'click', '#btnDetalleModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            $.ajax({
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + id,
+                dataType: 'json',
+                dataSrc: 'data',
+                error: function () {
+                    alert("Error en la peticion");
+                }
+            }).done(function (response) {
+                $('#nameDetalle').val(response.data.name_company);
+                $('#emailDetalle').val(response.data.email);
+                $('#cityDetalle').val(response.data.city);
+                $('#addresDetalle').val(response.data.address);
+                $('#phoneDetalle').val(response.data.phone);
+            });
+        });
+
+        //FUNCION ACTUALIZAR DATOS DE EMPRESA
+        $('#tabla tbody').on( 'click', '#btnEditarModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            $.ajax({
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                dataType: 'json',
+                dataSrc: 'data',
+                error: function () {
+                    alert("Error en la peticion");
+                }
+            }).done(function (response) {
+                $('#updateFirstName').val(response.data.first_name);
+                $('#updateLastName').val(response.data.last_name);
+                $('#updateEmail').val(response.data.email);
+                $('#updateCity').val(response.data.city);
+                $('#updatePhone').val(response.data.phone_number);
+                $('#updateSalary').val(response.data.salary);
+                $('#idEmpresa').val(id);
+                $.ajax({
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + response.data.company_id,
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    success: function (empresa) {
+                        $('#updateEmpresa').val(empresa.data.name_company);
+                    }
+                });
+
+            });
+
+        });
+
+        //FUNCION GUARDAR EDICIONES DE EMPRESA
+        $('#editarEmpleado').click(function () {
+            employee = new Object();
+            employee.first_name = $('#updateFirstName').val();
+            employee.last_name = $('#updateLastName').val();
+            employee.city = $('#updateCity').val();
+            employee.phone_number = $('#updatePhone').val();
+            employee.salary = $('#updateSalary').val();
+            console.log(employee);
+            $.ajax({
+                type: 'PUT',
+                url: "https://api-rest-companies-employees.herokuapp.com/api/employees/" + $('#idEmpresa').val(),
+                dataType: 'json',
+                data: employee,
+                success: function (data) {
+                    $('#modalEditar').modal('hide');
+                    table.api().ajax.reload();
+                },
+                error: function (error) {
+                    console.log(error.responseJSON);
+                }
+            });
+        });
+
+        //FUNCION PARA ELIMINAR EMPRESA
+        $('#tabla tbody').on( 'click', '#btnEliminarModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            var opcion = confirm('Desea eliminar el empleado?');
+            if (opcion) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    success: function () {
+                        table.api().ajax.reload();
+                        alert('Empleado eliminado');
+                    },
+                    error: function () {
+                        alert("Error al eliminar");
+                    }
+                });
+                console.log('Eliminado')
+            } else {
+                console.log('Gracias');
+            }
+
+        });
 
     });
 </script>

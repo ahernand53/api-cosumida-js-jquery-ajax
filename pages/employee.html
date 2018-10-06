@@ -430,7 +430,7 @@
             $('#phone').val("");
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8000/api/companies",
+                url: "https://api-rest-companies-employees.herokuapp.com/api/companies",
                 dataSrc: 'data',
                 success: function (data) {
                     $.each(data, function (key, registro) {
@@ -447,6 +447,7 @@
             });
             $('#saveEmpleado').click(function () {
                 if (validaForm()) {
+                    $('div').remove('.errorCreate');
                     let employee = new Object();
                     employee.first_name = $('#firstName').val();
                     employee.last_name = $('#lastName').val();
@@ -456,7 +457,7 @@
                     employee.phone_number = $('#phone').val();
                     employee.company_id = $('#selectEmpresa').val();
                     $.ajax({
-                        url: 'http://localhost:8000/api/employees',
+                        url: 'https://api-rest-companies-employees.herokuapp.com/api/employees',
                         type: 'POST',
                         dataType: 'json',
                         data: employee,
@@ -468,7 +469,7 @@
                         var data = $xhr.responseJSON;
                         console.log(data);
                         $.each(data.error, function (key ,value) {
-                            $('#formCreate').append('<div class="alert alert-danger">'+ value +'</div>');
+                            $('#formCreate').append('<div class="alert alert-danger errorCreate">'+ value +'</div>');
                         })
                     });
                 }
@@ -493,7 +494,7 @@
                 $('#detallePhone').val(response.data.phone_number);
                 $('#detalleSalary').val(response.data.salary);
                 $.ajax({
-                    url: 'http://localhost:8000/api/companies/' + response.data.company_id,
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + response.data.company_id,
                     dataType: 'json',
                     dataSrc: 'data',
                     success: function (empresa) {
