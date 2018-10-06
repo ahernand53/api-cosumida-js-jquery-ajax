@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Api Company - Employee</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Api Companies - Employees</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="home.html"><i class="fa fa-home fa-fw"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="company.html"><i class="fa fa-building fa-fw"></i> Empresas</a>
+                    </li>
+                    <li>
+                        <a href="employee.html"><i class="fa fa-user fa-fw"></i> Empleados</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Empleados</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Lista de Empresas
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="tabla">
+                                <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Ciudad</th>
+                                    <th>Salario</th>
+                                    <th>Opciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                            <div class="well">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" id="crearEmpleado" data-toggle="modal" data-target="#modalNuevo">Nuevo Empleado</button>
+
+
+                                <div class="btn-group form-inline">
+                                    <button type="button" class="btn btn-default">Ordenar</button>
+                                    <select class="form-control">
+                                        <option value="nan" selected>Ninguno</option>
+                                        <option value="first_name">Nombre</option>
+                                        <option value="last_name">Apellido</option>
+                                        <option value="salary">Salario</option>
+                                    </select>
+                                </div>
+
+                                <!-- MODAL CREAR EMPLEADO -->
+                                <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="modalTitle"><b>Nuevo Empleado</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="formCreate" >
+                                                    <div class="form-group">
+                                                        <label for="firstName">Nombre</label>
+                                                        <input type="text" class="form-control" id="firstName" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Apellido</label>
+                                                        <input type="text" class="form-control" id="lastName" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="email" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Ciudad</label>
+                                                        <input type="text" class="form-control" id="city" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Numero Telefonico</label>
+                                                        <input type="text" class="form-control" id="phone" required>
+                                                    </div>
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" id="salary" required>
+                                                        <span class="input-group-addon">.00</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="selectEmpresa">Empresa</label>
+                                                        <select class="form-control" id="selectEmpresa">
+                                                        </select>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary" id="saveEmpleado" >Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MODAL DETALLE EMPLEADO -->
+                                <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="detalleTitle"><b>Detalles</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form >
+                                                    <div class="form-group">
+                                                        <label for="firstName">Nombre</label>
+                                                        <input type="text" class="form-control" id="detalleFirstName" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Apellido</label>
+                                                        <input type="text" class="form-control" id="detalleLastName" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="detalleEmail" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Ciudad</label>
+                                                        <input type="text" class="form-control" id="detalleCity" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Numero Telefonico</label>
+                                                        <input type="text" class="form-control" id="detallePhone" disabled>
+                                                    </div>
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" id="detalleSalary" disabled>
+                                                        <span class="input-group-addon">.00</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="detalleEmpresa">Empresa</label>
+                                                        <input type="text" class="form-control" id="detalleEmpresa" disabled>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MODAL DETALLE EMPLEADO -->
+                                <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="actualizarTitle"><b>Actualizar Datos</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form >
+                                                    <div class="form-group">
+                                                        <label for="firstName">Nombre</label>
+                                                        <input type="text" class="form-control" id="updateFirstName" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Apellido</label>
+                                                        <input type="text" class="form-control" id="updateLastName" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="updateEmail" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Ciudad</label>
+                                                        <input type="text" class="form-control" id="updateCity">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="city">Numero Telefonico</label>
+                                                        <input type="text" class="form-control" id="updatePhone" >
+                                                    </div>
+                                                    <div class="form-group input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" id="updateSalary" >
+                                                        <span class="input-group-addon">.00</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="detalleEmpresa">Empresa</label>
+                                                        <input type="text" class="form-control" id="updateEmpresa" disabled>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" class="form-control" id="idEmpresa">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        <button type="button" class="btn btn-primary" id="editarEmpleado" >Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        var table = $('#tabla').dataTable({
+
+            "ajax":{
+                "url":"https://api-rest-companies-employees.herokuapp.com/api/employees",
+                "dataSrc":"data",
+                "crossDomain": "true"
+            },
+            "columns": [
+                {
+                    "data": "first_name"
+                },
+                {
+                    "data": "email"
+                },
+                {
+                    "data": "city"
+                },
+                {
+                    "data": "salary",
+                    render: function (data) {
+                        return "$ " + data + " dollars";
+                    }
+                }
+            ],
+            rowId: "id",
+            "columnDefs": [{
+                "targets": 4,
+                "data": null,
+                "defaultContent": "<button type='button' id='btnDetalleModal' class='btn btn-success btn-circle' data-toggle='modal' data-target='#modalDetalle'><i class='fa fa-search'></i> </button>" +
+                    "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-toggle='modal' data-target='#modalEditar' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
+                    "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalEliminar' ><i class='fa fa-trash'></i> </button>"
+            }],
+            responsive: true,
+            ordering: false
+
+        });
+
+        // VALIDA DATOS PARA CREAR NUEVO EMPLEADO
+        function validaForm(){
+            // Campos de texto
+            if($("#firstName").val() == ""){
+                alert("El campo Nombre no puede estar vacío.");
+                $("#nombre").focus();       // Esta función coloca el foco de escritura del usuario en el campo Nombre directamente.
+                return false;
+            }
+            if($("#lastName").val() == ""){
+                alert("El campo Apellido no puede estar vacío.");
+                $("#apellidos").focus();
+                return false;
+            }
+            if($("#email").val() == ""){
+                alert("El campo Email no puede estar vacío.");
+                $("#direccion").focus();
+                return false;
+            }
+            if($("#city").val() == ""){
+                alert("El campo Ciudad no puede estar vacío.");
+                $("#direccion").focus();
+                return false;
+            }
+            if($("#phone").val() == ""){
+                alert("El campo Numero telefonico no puede estar vacío.");
+                $("#direccion").focus();
+                return false;
+            }
+            if($("#salary").val() == ""){
+                alert("El campo Salario no puede estar vacío.");
+                $("#direccion").focus();
+                return false;
+            }
+
+            return true; // Si todo está correcto
+        }
+
+        // FUNCION GUARDAR NUEVO EMPLEADO
+        $("#crearEmpleado").click(function () {
+            $('#firstName').val("");
+            $('#lastName').val("");
+            $('#city').val("");
+            $('#email').val("");
+            $('#salary').val("");
+            $('#phone').val("");
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/api/companies",
+                dataSrc: 'data',
+                success: function (data) {
+                    $.each(data, function (key, registro) {
+                        var id = "";
+                        var name = "";
+                        $.each(registro, function (key, value) {
+                            id = value.id;
+                            name = value.name_company;
+                            $('#selectEmpresa').append('<option value='+ id +'>'+ name +'</option>');
+                        });
+
+                    });
+                }
+            });
+            $('#saveEmpleado').click(function () {
+                if (validaForm()) {
+                    let employee = new Object();
+                    employee.first_name = $('#firstName').val();
+                    employee.last_name = $('#lastName').val();
+                    employee.email = $('#email').val();
+                    employee.city = $('#city').val();
+                    employee.salary = $('#salary').val();
+                    employee.phone_number = $('#phone').val();
+                    employee.company_id = $('#selectEmpresa').val();
+                    $.ajax({
+                        url: 'http://localhost:8000/api/employees',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: employee,
+                        success: function (data) {
+                            $('#modalNuevo').modal('hide');
+                            table.api().ajax.reload();
+                        }
+                    }).fail(function ($xhr) {
+                        var data = $xhr.responseJSON;
+                        console.log(data);
+                        $.each(data.error, function (key ,value) {
+                            $('#formCreate').append('<div class="alert alert-danger">'+ value +'</div>');
+                        })
+                    });
+                }
+            });
+        });
+
+        // FUNCION VER DETALLE DE EMPLEADO
+        $('#tabla tbody').on( 'click', '#btnDetalleModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            $.ajax({
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                dataType: 'json',
+                dataSrc: 'data',
+                error: function () {
+                    alert("Error en la peticion");
+                }
+            }).done(function (response) {
+                $('#detalleFirstName').val(response.data.first_name);
+                $('#detalleLastName').val(response.data.last_name);
+                $('#detalleEmail').val(response.data.email);
+                $('#detalleCity').val(response.data.city);
+                $('#detallePhone').val(response.data.phone_number);
+                $('#detalleSalary').val(response.data.salary);
+                $.ajax({
+                    url: 'http://localhost:8000/api/companies/' + response.data.company_id,
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    success: function (empresa) {
+                        $('#detalleEmpresa').val(empresa.data.name_company);
+                    }
+                })
+            })
+        } );
+
+        //FUNCION ACTUALIZAR DATOS DE EMPLEADO
+        $('#tabla tbody').on( 'click', '#btnEditarModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            $.ajax({
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                dataType: 'json',
+                dataSrc: 'data',
+                error: function () {
+                    alert("Error en la peticion");
+                }
+            }).done(function (response) {
+                $('#updateFirstName').val(response.data.first_name);
+                $('#updateLastName').val(response.data.last_name);
+                $('#updateEmail').val(response.data.email);
+                $('#updateCity').val(response.data.city);
+                $('#updatePhone').val(response.data.phone_number);
+                $('#updateSalary').val(response.data.salary);
+                $('#idEmpresa').val(id);
+                $.ajax({
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + response.data.company_id,
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    success: function (empresa) {
+                        $('#updateEmpresa').val(empresa.data.name_company);
+                    }
+                });
+
+            });
+
+        });
+
+        //FUNCION GUARDAR EDICIONES DE EMPLEADO
+        $('#editarEmpleado').click(function () {
+            employee = new Object();
+            employee.first_name = $('#updateFirstName').val();
+            employee.last_name = $('#updateLastName').val();
+            employee.city = $('#updateCity').val();
+            employee.phone_number = $('#updatePhone').val();
+            employee.salary = $('#updateSalary').val();
+            console.log(employee);
+            $.ajax({
+                type: 'PUT',
+                url: "https://api-rest-companies-employees.herokuapp.com/api/employees/" + $('#idEmpresa').val(),
+                dataType: 'json',
+                data: employee,
+                success: function (data) {
+                    $('#modalEditar').modal('hide');
+                    table.api().ajax.reload();
+                },
+                error: function (error) {
+                    console.log(error.responseJSON);
+                }
+            });
+        });
+
+        //FUNCION PARA ELIMINAR EMPLEADO
+        $('#tabla tbody').on( 'click', '#btnEliminarModal', function () {
+            var id = table.api().row( $(this).parents('tr') ).id();
+            var opcion = confirm('Desea eliminar el empleado?');
+            if (opcion) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                    dataType: 'json',
+                    dataSrc: 'data',
+                    success: function () {
+                        table.api().ajax.reload();
+                        alert('Empleado eliminado');
+                    },
+                    error: function () {
+                        alert("Error al eliminar");
+                    }
+                });
+                console.log('Eliminado')
+            } else {
+                console.log('Gracias');
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>
