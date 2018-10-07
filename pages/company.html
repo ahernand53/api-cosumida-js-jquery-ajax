@@ -462,6 +462,7 @@
                 }
             }).done(function (response) {
                 $('#idEmpresa').val(response.data.id);
+                $('#nameUpdate').val(response.data.name_company);
                 $('#emailUpdate').val(response.data.email);
                 $('#addresUpdate').val(response.data.address);
                 $('#phoneUpdate').val(response.data.phone);
