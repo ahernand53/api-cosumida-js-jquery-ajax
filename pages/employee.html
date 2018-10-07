@@ -467,7 +467,6 @@
                         }
                     }).fail(function ($xhr) {
                         var data = $xhr.responseJSON;
-                        console.log(data);
                         $.each(data.error, function (key ,value) {
                             $('#formCreate').append('<div class="alert alert-danger errorCreate">'+ value +'</div>');
                         })
@@ -543,7 +542,6 @@
             employee.city = $('#updateCity').val();
             employee.phone_number = $('#updatePhone').val();
             employee.salary = $('#updateSalary').val();
-            console.log(employee);
             $.ajax({
                 type: 'PUT',
                 url: "https://api-rest-companies-employees.herokuapp.com/api/employees/" + $('#idEmpresa').val(),
@@ -554,7 +552,7 @@
                     table.api().ajax.reload();
                 },
                 error: function (error) {
-                    console.log(error.responseJSON);
+                    alert('Error al actualizar los datos')
                 }
             });
         });

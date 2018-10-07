@@ -220,6 +220,47 @@
                                     </div>
                                 </div>
 
+                                <!--MODAL DETALLE EMPRESA-->
+                                <div class="modal fade" id="modalUpdateEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="modalUpdateTitle"><b>Actualizar Datos</b></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="formUpdateEmpresa">
+                                                <div class="form-group">
+                                                    <label for="nameEmpresa">Nombre de Empresa</label>
+                                                    <input type="text" class="form-control" id="nameUpdate" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="emailEmpresa">Email de Empresa</label>
+                                                    <input type="email" class="form-control" id="emailUpdate" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cityEmpresa">Ciudad</label>
+                                                    <input type="text" class="form-control" id="cityUpdate" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="addresEmpresa">Direccion</label>
+                                                    <input type="text" class="form-control" id="addresUpdate" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phoneEmpresa">Telefono</label>
+                                                    <input type="text" class="form-control" id="phoneUpdate" >
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" id="idEmpresa">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-success" id="btnUpdateEmpresa">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!--MODAL MOSTRAR EMPLEADOS-->
                                 <div class="modal fade" id="modalMostrarEmpleados" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -301,7 +342,7 @@
                 "targets": 3,
                 "data": null,
                 "defaultContent": "<button type='button' id='btnDetalleModal' class='btn btn-success btn-circle' data-toggle='modal' data-target='#modalDetalleEmpresa' ><i class='fa fa-search' ></i> </button>"+ "<button type='button' id='btnMostrarEmpleados' data-toggle='modal' data-target='#modalMostrarEmpleados' class='btn btn-primary btn-circle'  style='margin: 0 5px;' ><i class='fa fa-users'></i> </button>" +
-                    "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-target='#modalEditar' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
+                    "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-toggle='modal' data-target='#modalUpdateEmpresa' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
                     "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalMostrarEmpleados' ><i class='fa fa-trash'></i> </button>"
             }],
             responsive: true
@@ -372,14 +413,11 @@
             });
         });
 
-        // TODO: SOLUCIONAR LA ACOMULACION DE EMPLEADOS
         // FUNCION VER EMPLEADOS DE LA EMPRESA
         $('#tabla tbody').on( 'click', '#btnMostrarEmpleados', function () {
             var id = table.api().row( $(this).parents('tr') ).id();
             var element = document.getElementById('listaEmpleado');
-            while(element.firstChild){
-                element.removeChild(element.firstChild);
-            }
+            $('.empleado').remove();
             $.ajax({
                 url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + id + '/employees',
                 datSrc: 'data',
@@ -414,31 +452,46 @@
         $('#tabla tbody').on( 'click', '#btnEditarModal', function () {
             var id = table.api().row( $(this).parents('tr') ).id();
             $.ajax({
-                url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + id,
                 dataType: 'json',
                 dataSrc: 'data',
                 error: function () {
                     alert("Error en la peticion");
                 }
             }).done(function (response) {
-                $('#updateFirstName').val(response.data.first_name);
-                $('#updateLastName').val(response.data.last_name);
-                $('#updateEmail').val(response.data.email);
-                $('#updateCity').val(response.data.city);
-                $('#updatePhone').val(response.data.phone_number);
-                $('#updateSalary').val(response.data.salary);
-                $('#idEmpresa').val(id);
-                $.ajax({
-                    url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + response.data.company_id,
-                    dataType: 'json',
-                    dataSrc: 'data',
-                    success: function (empresa) {
-                        $('#updateEmpresa').val(empresa.data.name_company);
-                    }
-                });
-
+                $('#idEmpresa').val(response.data.id);
+                $('#emailUpdate').val(response.data.email);
+                $('#addresUpdate').val(response.data.address);
+                $('#phoneUpdate').val(response.data.phone);
+                $('#cityUpdate').val(response.data.city);
             });
+        });
 
+        $('#btnUpdateEmpresa').click(function () {
+            $('.errorUpdate').remove();
+            empresa = new Object();
+            empresa.email = $('#emailUpdate').val();
+            empresa.city = $('#cityUpdate').val();
+            empresa.address = $('#addresUpdate').val();
+            empresa.phone = $('#phoneUpdate').val();
+            $.ajax({
+                type: 'PUT',
+                url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + $('#idEmpresa').val(),
+                dataType: 'json',
+                data: empresa,
+                success: function () {
+                    alert("Se han actualizado los datos");
+                    table.api().ajax.reload();
+                    $('#modalUpdateEmpresa').modal('hide');
+                }
+            }).fail(function ($xhr) {
+                var data = $xhr.responseJSON;
+                console.log(data);
+                $.each(data.error, function (key ,value) {
+                    $('#formUpdateEmpresa').append('<div class="alert alert-danger errorUpdate">'+ value +'</div>');
+                });
+                alert('Error al actualizar los datos');
+            });
         });
 
         //FUNCION GUARDAR EDICIONES DE EMPRESA
