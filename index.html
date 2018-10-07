@@ -1,13 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta http-equiv="refresh" content="0;url=pages/index.html">
-<title>SB Admin 2</title>
-<script language="javascript">
-    window.location.href = "pages/home.html"
-</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Api Company - Employee</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-Go to <a href="pages/index.html">/pages/index.html</a>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Api Companies - Employees</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="pages/home.html"><i class="fa fa-home fa-fw"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="pages/company.html"><i class="fa fa-building fa-fw"></i> Empresas</a>
+                    </li>
+                    <li>
+                        <a href="pages/employee.html"><i class="fa fa-user fa-fw"></i> Empleados</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Welcome</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+                <div>
+                    <h3>Desarrollado Por: <a href="https://github.com/ahernand53">Asdrubal Hernandez</a></h3>
+                    <p>Repositorio de la api <a href="https://github.com/ahernand53/api-restfull-company-employee" >aqui</a></p>
+                    <p>La api la deploye a heroku, para dar mas facilidad y no tengas que configurar nada mas, ahi esta el codigo fuente y todas sus funcionalidades.</p>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">METHOD</th>
+                            <th scope="col">URI</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">DESCRIPTION</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td>api/companies</td>
+                            <td>companies.index</td>
+                            <td>Devuelve todas las empresas existentes</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>api/companies</td>
+                            <td>companies.store</td>
+                            <td>Crea una empresa</td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td>api/companies/{company}</td>
+                            <td>companies.show</td>
+                            <td>Devuelve una empresa dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>api/companies/{company}</td>
+                            <td>companies.update</td>
+                            <td>Actualiza una empresa dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>api/companies/{company}</td>
+                            <td>companies.destroy</td>
+                            <td>Elimina una empresa dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>api/companies/{company}/employees</td>
+                            <td>companies.employees</td>
+                            <td>Devuelve los empleados de una empresa dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>api/employees</td>
+                            <td>employees.index</td>
+                            <td>Devuelve todos los empleados existentes</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>api/companies</td>
+                            <td>employees.store</td>
+                            <td>Crea un empleado</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>api/employees/{employee}</td>
+                            <td>employees.show</td>
+                            <td>Devuelve un empleado dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td>api/employees/{employee}</td>
+                            <td>employees.update</td>
+                            <td>Actualiza un empleado dado el id</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>aapi/employees/{employee}</td>
+                            <td>employees.destroy</td>
+                            <td>Elimina un empleado dado el id</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2>Otros metodos que se pueden realizar por la url:</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">api/companies?page=2 ---> Devuelve las empresas de la pagina 2</li>
+                        <li class="list-group-item">api/companies?order=name_company-asc ---> devuelve las empresas ordenadas alfabeticamente en acendente</li>
+                        <li class="list-group-item">api/companies?order=email-desc ---> Devuelve las empresas ordenadas alfabeticamente con su correo</li>
+                        <li class="list-group-item">api/employees?order=first_name-asc&page=2 ---> Devuelve los empleads ordenados alfabeticamente por su nombre y la pagina 2</li>
+                        <li class="list-group-item">api/employees?order=salary-desc&page=5&limit=10 ---> Devuelve los empleados ordenados por su salario en descendencia, pagina 5 y limitando la pagina a 10 empleados</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="dist/js/sb-admin-2.js"></script>
+
 </body>
+
 </html>
