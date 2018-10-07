@@ -123,7 +123,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table-striped table-bordered table-hover" id="tabla">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="tabla">
                                 <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -343,7 +343,7 @@
                 "data": null,
                 "defaultContent": "<button type='button' id='btnDetalleModal' class='btn btn-success btn-circle' data-toggle='modal' data-target='#modalDetalleEmpresa' ><i class='fa fa-search' ></i> </button>"+ "<button type='button' id='btnMostrarEmpleados' data-toggle='modal' data-target='#modalMostrarEmpleados' class='btn btn-primary btn-circle'  style='margin: 0 5px;' ><i class='fa fa-users'></i> </button>" +
                     "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-toggle='modal' data-target='#modalUpdateEmpresa' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
-                    "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalMostrarEmpleados' ><i class='fa fa-trash'></i> </button>"
+                    "<button type='button' id='btnEliminarEmpresa' class='btn btn-danger btn-circle'><i class='fa fa-trash'></i> </button>"
             }],
             responsive: true
 
@@ -423,7 +423,9 @@
                 datSrc: 'data',
                 success: function (response) {
                     $.each(response.data, function (key, empleado) {
-                        $('#mostrarE').append('<li class="list-group-item empleado">' + empleado.first_name + ' ' + empleado.last_name + '</li>')
+                        $('#mostrarE').append('<li class="list-group-item empleado">'
+                            + empleado.first_name + ' ' + empleado.last_name + ' <b>-</b> ' + empleado.email
+                            + '</li>')
                     });
                 }
             });
@@ -494,38 +496,14 @@
             });
         });
 
-        //FUNCION GUARDAR EDICIONES DE EMPRESA
-        $('#editarEmpleado').click(function () {
-            employee = new Object();
-            employee.first_name = $('#updateFirstName').val();
-            employee.last_name = $('#updateLastName').val();
-            employee.city = $('#updateCity').val();
-            employee.phone_number = $('#updatePhone').val();
-            employee.salary = $('#updateSalary').val();
-            console.log(employee);
-            $.ajax({
-                type: 'PUT',
-                url: "https://api-rest-companies-employees.herokuapp.com/api/employees/" + $('#idEmpresa').val(),
-                dataType: 'json',
-                data: employee,
-                success: function (data) {
-                    $('#modalEditar').modal('hide');
-                    table.api().ajax.reload();
-                },
-                error: function (error) {
-                    console.log(error.responseJSON);
-                }
-            });
-        });
-
         //FUNCION PARA ELIMINAR EMPRESA
-        $('#tabla tbody').on( 'click', '#btnEliminarModal', function () {
+        $('#tabla tbody').on( 'click', '#btnEliminarEmpresa', function () {
             var id = table.api().row( $(this).parents('tr') ).id();
             var opcion = confirm('Desea eliminar el empleado?');
             if (opcion) {
                 $.ajax({
                     type: 'DELETE',
-                    url: 'https://api-rest-companies-employees.herokuapp.com/api/employees/' + id,
+                    url: 'https://api-rest-companies-employees.herokuapp.com/api/companies/' + id,
                     dataType: 'json',
                     dataSrc: 'data',
                     success: function () {
@@ -536,9 +514,6 @@
                         alert("Error al eliminar");
                     }
                 });
-                console.log('Eliminado')
-            } else {
-                console.log('Gracias');
             }
 
         });

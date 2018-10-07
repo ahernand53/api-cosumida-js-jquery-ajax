@@ -143,15 +143,20 @@
                                 <button type="button" class="btn btn-primary" id="crearEmpleado" data-toggle="modal" data-target="#modalNuevo">Nuevo Empleado</button>
 
 
-                                <div class="btn-group form-inline">
-                                    <button type="button" class="btn btn-default">Ordenar</button>
-                                    <select class="form-control">
+                                <!--<div class="btn-group form-inline">
+                                    <button type="button" class="btn btn-default" id="ordernar">Ordenar</button>
+                                    <select class="form-control" id="fieldOrder">
                                         <option value="nan" selected>Ninguno</option>
                                         <option value="first_name">Nombre</option>
                                         <option value="last_name">Apellido</option>
                                         <option value="salary">Salario</option>
                                     </select>
-                                </div>
+                                    <select class="form-control" id="typeOrder">
+                                        <option value="nan" selected>Ninguno</option>
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>-->
 
                                 <!-- MODAL CREAR EMPLEADO -->
                                 <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -378,8 +383,7 @@
                     "<button type='button' id='btnEditarModal' class='btn btn-warning btn-circle' data-toggle='modal' data-target='#modalEditar' style='margin: 0 5px;' ><i class='fa fa-pencil'></i> </button>" +
                     "<button type='button' id='btnEliminarModal' class='btn btn-danger btn-circle' data-target='#modalEliminar' ><i class='fa fa-trash'></i> </button>"
             }],
-            responsive: true,
-            ordering: false
+            responsive: true
 
         });
 

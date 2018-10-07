@@ -107,6 +107,99 @@
                     <h1 class="page-header">Welcome</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div>
+                    <h3>Desarrollado Por: <a href="https://github.com/ahernand53">Asdrubal Hernandez</a></h3>
+                    <p>Repositorio de la api <a href="https://github.com/ahernand53/api-restfull-company-employee" >aqui</a></p>
+                    <p>La api la deploye a heroku, para dar mas facilidad y no tengas que configurar nada mas, ahi esta el codigo fuente y todas sus funcionalidades.</p>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">METHOD</th>
+                                <th scope="col">URI</th>
+                                <th scope="col">NAME</th>
+                                <th scope="col">DESCRIPTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GET</td>
+                                <td>api/companies</td>
+                                <td>companies.index</td>
+                                <td>Devuelve todas las empresas existentes</td>
+                            </tr>
+                            <tr>
+                                <td>POST</td>
+                                <td>api/companies</td>
+                                <td>companies.store</td>
+                                <td>Crea una empresa</td>
+                            </tr>
+                            <tr>
+                                <td>PATCH</td>
+                                <td>api/companies/{company}</td>
+                                <td>companies.show</td>
+                                <td>Devuelve una empresa dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>DELETE</td>
+                                <td>api/companies/{company}</td>
+                                <td>companies.update</td>
+                                <td>Actualiza una empresa dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>GET</td>
+                                <td>api/companies/{company}</td>
+                                <td>companies.destroy</td>
+                                <td>Elimina una empresa dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>GET</td>
+                                <td>api/companies/{company}/employees</td>
+                                <td>companies.employees</td>
+                                <td>Devuelve los empleados de una empresa dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>GET</td>
+                                <td>api/employees</td>
+                                <td>employees.index</td>
+                                <td>Devuelve todos los empleados existentes</td>
+                            </tr>
+                            <tr>
+                                <td>POST</td>
+                                <td>api/companies</td>
+                                <td>employees.store</td>
+                                <td>Crea un empleado</td>
+                            </tr>
+                            <tr>
+                                <td>GET</td>
+                                <td>api/employees/{employee}</td>
+                                <td>employees.show</td>
+                                <td>Devuelve un empleado dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>PATCH</td>
+                                <td>api/employees/{employee}</td>
+                                <td>employees.update</td>
+                                <td>Actualiza un empleado dado el id</td>
+                            </tr>
+                            <tr>
+                                <td>DELETE</td>
+                                <td>aapi/employees/{employee}</td>
+                                <td>employees.destroy</td>
+                                <td>Elimina un empleado dado el id</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2>Otros metodos que se pueden realizar por la url:</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">api/companies?page=2 ---> Devuelve las empresas de la pagina 2</li>
+                        <li class="list-group-item">api/companies?order=name_company-asc ---> devuelve las empresas ordenadas alfabeticamente en acendente</li>
+                        <li class="list-group-item">api/companies?order=email-desc ---> Devuelve las empresas ordenadas alfabeticamente con su correo</li>
+                        <li class="list-group-item">api/employees?order=first_name-asc&page=2 ---> Devuelve los empleads ordenados alfabeticamente por su nombre y la pagina 2</li>
+                        <li class="list-group-item">api/employees?order=salary-desc&page=5&limit=10 ---> Devuelve los empleados ordenados por su salario en descendencia, pagina 5 y limitando la pagina a 10 empleados</li>
+                    </ul>
+                </div>
             </div>
             <!-- /.row -->
         </div>
