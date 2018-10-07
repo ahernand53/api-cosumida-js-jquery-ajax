@@ -423,8 +423,8 @@
                 datSrc: 'data',
                 success: function (response) {
                     $.each(response.data, function (key, empleado) {
-                        $('#mostrarE').append('<li class="list-group-item empleado">'
-                            + empleado.first_name + ' ' + empleado.last_name + ' <b>-</b> ' + empleado.email
+                        $('#mostrarE').append('<li class="list-group-item empleado"> <b>Nombre:</b> '
+                            + empleado.first_name + ' ' + empleado.last_name + ' <b>- Email: </b> ' + empleado.email
                             + '</li>')
                     });
                 }
